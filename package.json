@@ -19,6 +19,9 @@
     "name": "Mohammed Makhlouf",
     "email": "msmakhlouf@gmail.com"
   },
+  "peerDependencies": {
+    "react-native": ">= 0.11.0"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/msmakhlouf/react-native-android-sms/issues"
