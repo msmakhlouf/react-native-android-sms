@@ -2,8 +2,9 @@
 
 A react native android module to list/send sms.
 
-[![npm](https://img.shields.io/npm/v/npm.svg?style=flat-square)](https://www.npmjs.com/package/react-native-android-sms)
-[![GitHub tag](https://img.shields.io/github/tag/strongloop/express.svg?style=flat-square)](https://github.com/msmakhlouf/react-native-android-sms)
+[![npm](https://img.shields.io/npm/v/react-native-android-sms.svg?style=flat-square)](https://www.npmjs.com/package/react-native-android-sms)
+
+[![GitHub tag](https://img.shields.io/github/tag/msmakhlouf/react-native-android-sms.svg?style=flat-square)](https://github.com/msmakhlouf/react-native-android-sms)
 
 ## Setup
 
