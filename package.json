@@ -1,0 +1,27 @@
+{
+  "name": "react-native-android-sms",
+  "version": "0.0.1",
+  "description": "A react native android module to list/send sms.",
+  "main": "index.android.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/msmakhlouf/react-native-android-sms.git"
+  },
+  "keywords": [
+    "react-component",
+    "react-native",
+    "android"
+  ],
+  "author": {
+    "name": "Mohammed Makhlouf",
+    "email": "msmakhlouf@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/msmakhlouf/react-native-android-sms/issues"
+  },
+  "homepage": "https://github.com/msmakhlouf/react-native-android-sms#readme"
+}
