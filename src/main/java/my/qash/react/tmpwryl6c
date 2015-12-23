@@ -1,0 +1,165 @@
+package my.qash.react;
+
+
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.Callback;
+import com.facebook.react.bridge.NativeModule;
+import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.bridge.ReactContextBaseJavaModule;
+import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableMap;
+
+import android.os.Bundle;
+import android.widget.Toast;
+import android.app.LoaderManager;
+import android.content.ContentResolver;
+import android.content.CursorLoader;
+import android.content.Loader;
+import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
+import android.app.Activity;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+
+/**
+ * Created by mak on 11/6/15.
+ */
+public class SmsModule extends ReactContextBaseJavaModule /*implements LoaderManager.LoaderCallbacks<Cursor>*/ {
+//    private LoaderManager mManager;
+    private Cursor smsCursor;
+    private Map<Long, String> smsList;
+    private Map<Long, Object> smsListBody;
+    Activity mActivity = null;
+    public SmsModule(ReactApplicationContext reactContext, Activity activity)
+    {
+        super(reactContext);
+        mActivity = activity;
+        smsList = new HashMap<Long, String>();
+        
+        
+//        mManager = mActivity.getLoaderManager();
+//        mManager.initLoader(0, null, this);
+    }
+
+    @Override
+    public String getName()
+    {
+        return "Sms";
+    }
+    @ReactMethod
+    public void show(String message, int duration)
+    {
+        Toast.makeText(getReactApplicationContext(), message, duration).show();
+    }
+
+
+//    @Override
+//    public Loader<Cursor> onCreateLoader(int id, Bundle bundle) {
+//        String searchString = "QNB";
+//        return new CursorLoader(mActivity, Uri.parse("content://sms/inbox"), null, "address Like \"%" + searchString + "%\"", null, null);
+//    }
+
+
+//    @Override
+////    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+////
+////        long count = 0;
+////        while (cursor.moveToNext()) {
+////            Long dateTime = Long.parseLong(cursor.getString(cursor.getColumnIndex("date")));
+////            String message = cursor.getString(cursor.getColumnIndex("body"));
+////            smsList.put(dateTime,message);
+////        }
+////        return;
+////    }
+////    @Override
+////    public void onLoaderReset(Loader<Cursor> arg0) {
+////            smsCursor = null;
+////    }
+
+    @ReactMethod
+    public void list(final Callback errorCallback, final Callback successCallback) {
+        String searchString = "QNB";
+        Cursor cursor = mActivity.getContentResolver().query(Uri.parse("content://sms/inbox"), null, "address Like \"%" + searchString + "%\"", null, null);
+
+        String count = "a7ay ya bo soosoo a7ay";
+        int c = 0;
+
+        // String bigAss = "";
+        // WritableMap map = Arguments.createMap();
+        JSONArray jsons = new JSONArray();
+        String r = "";
+        while (cursor.moveToNext()) {
+            Long dateTime = Long.parseLong(cursor.getString(cursor.getColumnIndex("date")));
+            String message = cursor.getString(cursor.getColumnIndex("body"));
+            JSONObject json;
+            if ((json = getJsonFromCursor(cursor)) == null) {
+
+            }
+            jsons.put(json);
+   //          r = "{\"timestamp\": " + dateTime + ", \"body\": \""+message+"\"}**&**";
+   //          c++;
+   //          bigAss += r;
+   //          r = "";  
+   //          if (c==1000)
+   //          {
+			// 	break;
+			// }
+        }
+		// bigAss = bigAss.substring(0, bigAss.length()-5);
+        cursor.close();
+        try {
+        	//WritableMap list = Arguments.createMap();
+        	//list.putMap("sms", map);
+            successCallback.invoke(count, c, jsons);
+        } catch (Exception e) {
+            errorCallback.invoke(e.getMessage());
+        }
+    }
+
+    private JSONObject getJsonFromCursor(Cursor cur) {
+        JSONObject json = new JSONObject();
+
+        int nCol = cur.getColumnCount();
+        String[] keys = cur.getColumnNames();
+        try
+        {
+          for (int j = 0; j < nCol; j++)
+            switch (cur.getType(j)) {
+            case 0:
+              json.put(keys[j], null);
+              break;
+            case 1:
+              json.put(keys[j], cur.getInt(j));
+              break;
+            case 2:
+              json.put(keys[j], cur.getFloat(j));
+              break;
+            case 3:
+              json.put(keys[j], cur.getString(j));
+              break;
+            case 4:
+              json.put(keys[j], cur.getBlob(j));
+            }
+        }
+        catch (Exception e)
+        {
+          return null;
+        }
+
+        return json;
+    }
+}
+
+
+
+
+
