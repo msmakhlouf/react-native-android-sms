@@ -166,7 +166,7 @@ public class SmsModule extends ReactContextBaseJavaModule /*implements LoaderMan
             PendingIntent sentIntent = PendingIntent.getActivity(mActivity, 0, new Intent("android.intent.action.VIEW"), 0);
             Intent intent = new Intent("android.intent.action.VIEW");
             intent.putExtra("sms_body", text);
-            intent.setType("vnd.android-dir/mms-sms");
+            intent.setData(Uri.parse("sms:"));
             try {
               sentIntent.send(mActivity.getApplicationContext(), 0, intent);
               successCallback.invoke("OK");
