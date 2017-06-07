@@ -19,15 +19,11 @@ import java.util.List;
  */
 
 public class SmsPackage implements ReactPackage {
-    private Activity mActivity = null;
 
-    public SmsPackage(Activity activity){
-        mActivity = activity;
-    }
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactApplicationContext) {
         List<NativeModule> modules = new ArrayList<>();
-        modules.add(new SmsModule(reactApplicationContext,mActivity));
+        modules.add(new SmsModule(reactApplicationContext));
         return modules;
     }
 
