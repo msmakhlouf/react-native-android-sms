@@ -46,10 +46,9 @@ public class SmsModule extends ReactContextBaseJavaModule /*implements LoaderMan
     private Map<Long, String> smsList;
     private Map<Long, Object> smsListBody;
     Activity mActivity = null;
-    public SmsModule(ReactApplicationContext reactContext, Activity activity)
+    public SmsModule(ReactApplicationContext reactContext)
     {
         super(reactContext);
-        mActivity = activity;
         smsList = new HashMap<Long, String>();
     }
 
@@ -61,6 +60,7 @@ public class SmsModule extends ReactContextBaseJavaModule /*implements LoaderMan
 
     @ReactMethod
     public void list(String filter, final Callback errorCallback, final Callback successCallback) {
+        mActivity = getCurrentActivity();
         try{
             JSONObject filterJ = new JSONObject(filter);
             String uri_filter = filterJ.has("box") ? filterJ.optString("box") : "inbox";
@@ -149,6 +149,7 @@ public class SmsModule extends ReactContextBaseJavaModule /*implements LoaderMan
     
     @ReactMethod
     public void send(String addresses, String text, final Callback errorCallback, final Callback successCallback) {
+      mActivity = getCurrentActivity();
       try {
         JSONObject jsonObject = new JSONObject(addresses);
         JSONArray addressList = jsonObject.getJSONArray("addressList");
