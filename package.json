@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/briankabiro/react-native-android-sms.git"
+    "url": "git+https://github.com/msmakhlouf/react-native-android-sms.git"
   },
   "keywords": [
     "react-component",
