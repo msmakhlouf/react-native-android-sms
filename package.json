@@ -1,6 +1,6 @@
 {
   "name": "react-native-android-sms",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A react native android module to list/send sms.",
   "main": "index.android.js",
   "scripts": {
